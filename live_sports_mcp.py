@@ -6,7 +6,7 @@ print("[DEBUG] Imports complete.")
 mcp = FastMCP("Live_Sports_Coach")
 print("[DEBUG] FastMCP instance created.")
 
-# ---- Tool: Fetch live game stats ----
+# - here i fetch live game stats ----
 @mcp.tool()
 def fetch_live_stats(sport: str, game_id: str) -> dict:
     print(f"[DEBUG] fetch_live_stats called with sport={sport}, game_id={game_id}")
@@ -14,11 +14,11 @@ def fetch_live_stats(sport: str, game_id: str) -> dict:
     Fetch live stats from a public API (replace with actual API endpoints).
     Returns key stats in a standard format.
     """
-    # Example API call (pseudo-code, you need actual API key & endpoint)
+    # API call here 
     # response = requests.get(f"https://api.sportsdata.io/{sport}/games/{game_id}/stats", headers={"Ocp-Apim-Subscription-Key": "YOUR_KEY"})
     # stats = response.json()
     
-    # Placeholder example data
+    # ex data
     stats = {
         "home_score": 78,
         "away_score": 74,
@@ -30,7 +30,7 @@ def fetch_live_stats(sport: str, game_id: str) -> dict:
     print("[DEBUG] fetch_live_stats returning stats.")
     return stats
 
-# ---- Tool: Predict win probability ----
+# --  here it predicts win probability ----
 @mcp.tool()
 def predict_win_probability(stats: dict) -> dict:
     print(f"[DEBUG] predict_win_probability called with stats={stats}")
@@ -51,7 +51,7 @@ def predict_win_probability(stats: dict) -> dict:
     return {"home_win_probability": round(prob, 2), "away_win_probability": round(1 - prob, 2)}
     print("[DEBUG] predict_win_probability returning result.")
 
-# ---- Resource: Training / improvement tips ----
+# - heres the Training / improvement tips ----
 @mcp.resource("live_training://{skill}")
 def live_training_plan(skill: str) -> str:
     plans = {
@@ -61,7 +61,7 @@ def live_training_plan(skill: str) -> str:
     }
     return plans.get(skill.lower(), "No training plan available.")
 
-# ---- Prompt: Strategy suggestion for current situation ----
+# ---- prompt is strategy suggestion for current situation ----
 @mcp.prompt()
 def real_time_strategy(sport: str, stats: dict, situation: str) -> str:
     """
